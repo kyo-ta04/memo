@@ -1,5 +1,6 @@
-## ASCIIART マンデンブロ集合 Forth
-
+# ASCIIART マンデンブロ集合 Forth
+## ソース
+```
 0 VARIABLE Y
 0 VARIABLE X
 0 VARIABLE C
@@ -62,4 +63,4 @@
   LOOP
   ." OK" CR QUERY QUERY
 ;
-
+```
