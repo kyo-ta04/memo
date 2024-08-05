@@ -1,5 +1,6 @@
-# ASCIIART マンデンブロ集合 Forth
-## ソース
+# ASCIIART (マンデンブロ集合) のソース
+## FORTH
+TinyBASICのものから移植、figFORTH 1.1/1.3 で試しました
 ```
 0 VARIABLE Y
 0 VARIABLE X
