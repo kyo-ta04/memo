@@ -153,6 +153,8 @@ TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
      (princ "\n")
      (setq Y (+ Y 1)))
    (princ "OK\n")
+   (fgets)
+   (princ "")
 )
 ```
 
