@@ -73,6 +73,49 @@ ASCIIARTに不可能はない！
 460 IF Y<=-12 GOTO 30
 ```
 
+## EXCEL VBA (整数型)
+Microsoft Excel 2019で試しました。
+```
+Sub Macro1()
+    Dim F, Y, X, C, D, A, B, I, Q, S, T, P, Z As Integer
+    
+    F = 50
+    Y = -12
+    Do
+        X = -39
+        Do
+            C = X * 229 / 100
+            D = Y * 416 / 100
+            A = C
+            B = D
+            I = 0
+            Do
+                Q = B / F
+                S = B - Q * F
+                T = (A * A - B * B) / F + C
+                B = 2 * (A * Q + A * S / F) + D
+                A = T
+                P = A / F
+                Q = B / F
+                Z = 0
+                If P * P + Q * Q > 4 Then
+                     Cells(Y + 13, X + 40).Value = Hex$(I)
+                     Z = -1
+                Else
+                     I = I + 1
+                     If I > 15 Then
+                        Cells(Y + 13, Y + 40).Value = " "
+                        Z = -1
+                    End If
+                End If
+            Loop Until Not (Z = 0)
+            X = X + 1
+        Loop Until (X > 39)
+        Y = Y + 1
+    Loop Until (Y > 12)
+End Sub
+```
+
 ## XLISP (整数型)
 TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
 ```
