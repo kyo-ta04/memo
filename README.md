@@ -73,6 +73,46 @@ ASCIIARTに不可能はない！
 460 IF Y<=-12 GOTO 30
 ```
 
+## XLISP (整数型)
+TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
+```
+(defun mandel ()
+   (fgets)
+   (fgets)
+   (setq F 50)
+   (setq Y -12)
+   (while (<= Y 12)
+     (setq X -39)
+     (while (<= X 39)
+       (setq C (/ (* X 229) 100))
+       (setq D (/ (* Y 416) 100))
+       (setq A C)
+       (setq B D)
+       (setq I 0)
+       (setq Z 0)
+       (while (== Z 0)
+         (setq Q (/ B F))
+         (setq S (- B (* Q F)))
+         (setq TT (+ (/ (- (* A A) (* B B)) F) C))
+         (setq B (+ (* 2 (+ (* A Q) (/ (* A S) F))) D))
+         (setq A TT)
+         (setq P (/ A F))
+         (setq Q (/ B F))
+         (setq Z 0)
+         (cond ((> (+ (* P P) (* Q Q) ) 4)
+             (cond ((< I 10) (princ I))
+               (t (princ (chr (+ 55 I)))))
+             (setq Z -1))
+           (t (setq I (+ I 1))
+             (cond ((> I 15)
+	         (princ " ") (setq Z -1))))))
+       (setq X (+ X 1)))
+     (princ "\n")
+     (setq Y (+ Y 1)))
+   (princ "OK\n")
+)
+```
+
 ## Common Lisp (実数型)
 MSBASICのものから移植
 ```
