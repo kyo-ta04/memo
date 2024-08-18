@@ -334,6 +334,51 @@ main()
 }
 ```
 
+## C (整数型)
+Hi-TECH C Z80 v3.09 CP/M-80 2.2 で試しました  
+```
+#include <stdio.h>
+
+char	junk[256];
+
+main()
+{
+	int f, i, x, y;
+	int c, d, a, b, q, s, t, p;
+
+	printf("hit Enter key:");
+	gets(junk);
+
+	f = 50;
+	for (y = -12; y <= 12; y++) {
+		for (x = -39; x <= 39; x++) {
+			c = x * 229 / 100;
+			d = y * 416 / 100;
+			a = c;
+			b = d;
+			for (i = 0; i <=15; i++) {
+				q = b / f;
+				s = b - q * f;
+				t = (a * a - b * b) / f + c;
+				b = 2 * (a * q + a * s / f) + d;
+				a = t;
+				p = a / f;
+				q = b / f;
+				if ((p * p + q * q) > 4) {
+					break;
+				}
+			}
+			putch("0123456789ABCDEF "[i]);
+		}
+		putch('\n');
+	}
+	printf("OK\n");
+	printf("\n");
+	gets(junk);
+}
+
+```
+
 ## Turbo Pascal (実数型)
 Turbo Pascal v3.01a CP/M-80 で試しました  
 ```
