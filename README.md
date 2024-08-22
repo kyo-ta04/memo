@@ -1,4 +1,5 @@
 # ASCIIART (マンデンブロ集合) のソース
+
 ## MSBASIC (実数型)
 全てはここから
 ```
@@ -22,6 +23,7 @@
 220 PRINT
 230 NEXT Y
 ```
+
 
 ## TinyBASIC (整数型)
 ASCIIARTに不可能はない！
@@ -113,6 +115,7 @@ C言語を参考に修正
 370 NEXT Y
 ```
 
+
 ## EXCEL VBA (整数型)
 Microsoft Excel 2019で試しました。
 ```
@@ -156,6 +159,7 @@ Sub Macro1()
 End Sub
 ```
 
+
 ## XLISP (整数型)
 TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
 ```
@@ -198,6 +202,7 @@ TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
 )
 ```
 
+
 ## Common Lisp (実数型)
 MSBASICのものから移植
 ```
@@ -224,46 +229,33 @@ MSBASICのものから移植
   (terpri))
 ```
 
+
 ## FORTH (整数型)
 TinyBASICのものから移植、CP/M 8080 figFORTH 1.1/1.3, Z80 figFORTH 1.1g で試しました
 ```
+0 VARIABLE F
 0 VARIABLE Y
 0 VARIABLE X
 0 VARIABLE C
 0 VARIABLE D
 0 VARIABLE A
 0 VARIABLE B
-0 VARIABLE Z
-0 VARIABLE T
-0 VARIABLE F
+0 VARIABLE II
 0 VARIABLE Q
 0 VARIABLE S
+0 VARIABLE T
 0 VARIABLE P
-0 VARIABLE II
-
-: OUTCH
-  II @ 10 < IF
-    II @ 48 + EMIT
-  ELSE
-    II @ 15 > IF
-     32 EMIT
-    ELSE
-      II @ 55 + EMIT
-    THEN
-   THEN
-; 
-
 : RUN
   CR
   50 F !
-  13 -12 DO I Y !
-    40 -39 DO I X !
+  25 0 DO I 12 - Y !
+    79 0 DO I 39 - X !
       X @ 229 * 100 / C !
       Y @ 416 * 100 / D !
       C @ A !
       D @ B !
-      0 II !
-      BEGIN
+      17 0 DO
+        I II !
         B @ F @ / Q !
         B @ Q @ F @ * - S !
         A @ A @ * B @ B @ * - F @ / C @ + T !
@@ -271,25 +263,24 @@ TinyBASICのものから移植、CP/M 8080 figFORTH 1.1/1.3, Z80 figFORTH 1.1g �
         T @ A !
         A @ F @ / P !
         B @ F @ / Q !
-        0 Z !
         P @ P @ * Q @ Q @ * + 4 > IF
-          OUTCH
-          -1 Z !
-        ELSE
-          II @ 1 + II !
-          II @ 15 > IF
-              32 EMIT
-              -1 Z !
-          THEN
+          LEAVE
         THEN
-        Z @ -1 =
-      UNTIL
+      LOOP
+      II @ 15 > IF
+        SPACE
+      ELSE
+        II @ DUP
+        9 > IF 7 + THEN
+        48 + EMIT
+      THEN
     LOOP
     CR
   LOOP
   ." OK" CR FIRST 80 EXPECT CR
 ;
 ```
+
 
 ## C (実数型)
 Hi-TECH C Z80 v3.09 CP/M-80 2.2 で試しました  
@@ -333,6 +324,7 @@ main()
 	gets(junk);
 }
 ```
+
 
 ## C (整数型)
 Hi-TECH C Z80 v3.09 CP/M-80 2.2 で試しました  
@@ -378,6 +370,7 @@ main()
 }
 
 ```
+
 
 ## Turbo Pascal (実数型)
 Turbo Pascal v3.01a CP/M-80 で試しました  
