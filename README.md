@@ -185,7 +185,6 @@ TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
          (setq A TT)
          (setq P (/ A F))
          (setq Q (/ B F))
-         (setq Z 0)
          (cond ((> (+ (* P P) (* Q Q) ) 4)
              (cond ((< I 10) (princ I))
                (t (princ (chr (+ 55 I)))))
