@@ -228,6 +228,52 @@ MSBASICのものから移植
   (terpri))
 ```
 
+## Emacs-Lisp (整数型)
+```
+(defun mandel ()
+  "マンデルブロ集合のASCIIアートを現在のバッファに描画する"
+  (interactive)
+  (let ((F 50)
+        (Y -12)
+        X C D A B I Z Q S TT P)
+    (while (<= Y 12)
+      (setq X -39)
+      (while (<= X 39)
+        (setq C (/ (* X 229) 100))
+        (setq D (/ (* Y 416) 100))
+        (setq A C)
+        (setq B D)
+        (setq I 0)
+        (setq Z 0)
+        (while (= Z 0)
+          (setq Q (/ B F))
+          (setq S (- B (* Q F)))
+          (setq TT (+ (/ (- (* A A) (* B B)) F) C))
+          (setq B (+ (* 2 (+ (* A Q) (/ (* A S) F))) D))
+          (setq A TT)
+          (setq P (/ A F))
+          (setq Q (/ B F))
+          (if (> (+ (* P P) (* Q Q)) 4)
+              (progn
+                (if (< I 10)
+                    (insert (number-to-string I))
+                  (insert (format "%c" (+ 55 I))))
+                (setq Z -1))
+            (setq I (1+ I))
+            (if (> I 15)
+                (progn
+                  (insert " ")
+                  (setq Z -1)))))
+        (setq X (1+ X)))
+      (insert "\n")
+      (setq Y (1+ Y)))
+    (insert "OK\n")))
+```
+### 実行方法
+1. `*scratch*` バッファ（または任意の `.el` ファイル）に上記のコードを貼り付け  
+2. コード全体を評価する（`C-x C-e` または `eval-buffer`）  
+3. `M-x mandel` と入力して実行  
+
 
 ## FORTH (整数型)
 TinyBASICのものから移植、CP/M 8080 figFORTH 1.1/1.3, Z80 figFORTH 1.1g で試しました
@@ -415,3 +461,94 @@ break:
 end.
 ```
 バグっていたので修正しました。
+
+## Python (その1)
+```
+import sys
+
+def main():
+    input("hit Enter key:")
+    for y in range(-12, 13):
+        for x in range(-39, 40):
+            ca = x * 0.0458
+            cb = y * 0.08333
+            a = ca
+            b = cb
+            i = 0
+            for i in range(16):
+                t = a * a - b * b + ca
+                b = 2 * a * b + cb
+                a = t
+                if (a * a + b * b) > 4:
+                    break
+            else:
+                i = 16
+            chars = "0123456789ABCDEF "
+            print(chars[i], end="")
+        print()
+    print("OK")
+    input("hit Enter key:")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Python (その2)
+```
+def mandelbrot_ascii():
+
+    chars = "0123456789ABCDEF "
+    x_range = range(-39, 40)
+    y_range = range(-12, 13)
+
+    input("hit Enter key:")
+    for y in y_range:
+        line = ""
+        for x in x_range:
+            c = complex(x * 0.0458, y * 0.08333)
+            z = c
+            n = next((i for i in range(16) if abs(z := z*z + c) > 2), 16)
+            line += chars[n]
+        print(line)
+    print("OK")
+    input("hit Enter key:")
+
+if __name__ == "__main__":
+    mandelbrot_ascii()
+```
+
+## Python (その3)
+```
+def c_div(a, b):
+    return int(a / b)
+
+def main():
+    input("hit Enter key:")
+
+    f = 50
+    for y in range(-12, 13):
+        for x in range(-39, 40):
+            c = c_div(x * 229, 100)
+            d = c_div(y * 416, 100)
+            a = c
+            b = d
+            ans_i = 16
+            for i in range(16):
+                q = c_div(b, f)
+                s = b - q * f
+                t = c_div(a * a - b * b, f) + c
+                b = 2 * (a * q + c_div(a * s, f)) + d
+                a = t
+                p = c_div(a, f)
+                q = c_div(b, f)
+                if (p * p + q * q) > 4:
+                    ans_i = i
+                    break
+            chars = "0123456789ABCDEF "
+            print(chars[ans_i], end="")
+        print("")
+    print("OK")
+
+if __name__ == "__main__":
+    main()
+```
