@@ -201,6 +201,48 @@ TinyBASICのものから移植、 XLISP v1.1 CP/M-80 2.2 で試しました。
 )
 ```
 
+## XLISP (整数型その2)
+**cond()の代わりに if()を使用、XLISP11a 修正版用**
+```
+(defun mandel ()
+   (fgets)
+   (fgets)
+   (setq F 50)
+   (setq Y -12)
+   (while (<= Y 12)
+     (setq X -39)
+     (while (<= X 39)
+       (setq C (/ (* X 229) 100))
+       (setq D (/ (* Y 416) 100))
+       (setq A C)
+       (setq B D)
+       (setq I 0)
+       (setq Z 0)
+       (while (== Z 0)
+         (setq Q (/ B F))
+         (setq S (- B (* Q F)))
+         (setq TT (+ (/ (- (* A A) (* B B)) F) C))
+         (setq B (+ (* 2 (+ (* A Q) (/ (* A S) F))) D))
+         (setq A TT)
+         (setq P (/ A F))
+         (setq Q (/ B F))
+         (if (> (+ (* P P) (* Q Q)) 4)
+             (repeat 1
+               (if (< I 10) (princ I) (princ (chr (+ 55 I))))
+               (setq Z -1))
+             (repeat 1
+               (setq I (+ I 1))
+               (if (> I 15)
+                   (repeat 1 (princ " ") (setq Z -1))))))
+       (setq X (+ X 1)))
+     (princ "\n")
+     (setq Y (+ Y 1)))
+   (princ "OK\n")
+   (fgets)
+   (princ ""))
+
+```
+
 
 ## Common Lisp (実数型)
 MSBASICのものから移植
